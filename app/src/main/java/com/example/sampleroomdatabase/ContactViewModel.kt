@@ -12,8 +12,11 @@ import com.example.sampleroomdatabase.data.Contact
 import com.example.sampleroomdatabase.data.ContactDatabase
 import kotlinx.coroutines.launch
 
-class ContactViewModel(private val database: ContactDatabase) : ViewModel() {
+class ContactViewModel(
+    private val database: ContactDatabase
+) : ViewModel() {
     private var contactEntity: Contact? = null
+
     var firstName by mutableStateOf("")
     var lastName by mutableStateOf("")
 

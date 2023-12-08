@@ -52,6 +52,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.sampleroomdatabase.ContactViewModel
 
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CreateContactScreen(
@@ -77,7 +78,8 @@ fun CreateContactScreen(
                     Button(
                         onClick = {
                             if (contactViewModel.firstName.isEmpty() && contactViewModel.lastName.isEmpty()) {
-                                Toast.makeText(localContext, "All fields empty", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(localContext, "All fields empty", Toast.LENGTH_SHORT)
+                                    .show()
                             } else {
                                 contactViewModel.insertContact()
                                 navController.popBackStack()

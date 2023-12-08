@@ -63,7 +63,7 @@ fun MainScreen(
             ExtendedFloatingActionButton(
                 onClick = { navController.navigate(Screens.CreateContactScreen.destination) },
                 icon = { Icon(Icons.Default.Add, "") },
-                text = { Text("Add contact")},
+                text = { Text("Add contact") },
                 expanded = extendedFab
             )
         },
