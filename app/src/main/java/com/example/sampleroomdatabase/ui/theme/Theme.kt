@@ -9,7 +9,11 @@ import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
@@ -67,9 +71,41 @@ fun SampleRoomDatabaseTheme(
         }
     }
 
-    MaterialTheme(
+    /*MaterialTheme(
         colorScheme = colorScheme,
         typography = Typography,
         content = content
-    )
+    )*/
+
+   /* val localDynamicColor = MaterialTheme.dynamicColor
+    val rememberedColorScheme = remember {
+        localDynamicColor.copy()
+    }.apply {
+        updateDynamicColorScheme(localDynamicColor)
+    }*/
+
+    MaterialTheme(
+        colorScheme = colorScheme,
+        typography = Typography,
+    ) {
+        CompositionLocalProvider(
+            LocalDynamicColor provides DynamicColor(),
+            content = content
+        )
+    }
 }
+
+
+data class DynamicColor(var dynamicColor: Boolean = false)
+
+var LocalDynamicColor = staticCompositionLocalOf { DynamicColor() }
+
+val MaterialTheme.dynamicColor: DynamicColor
+    @Composable
+    @ReadOnlyComposable
+    get() = LocalDynamicColor.current
+
+/*
+internal fun DynamicColor.updateDynamicColorScheme(other: DynamicColor) {
+    dynamicColor = other.dynamicColor
+}*/

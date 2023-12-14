@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.sampleroomdatabase.data.Contact.Companion.DATABASE_NAME
 
 @Database(entities = [Contact::class], version = 1)
 abstract class ContactDatabase : RoomDatabase() {
@@ -13,7 +14,7 @@ abstract class ContactDatabase : RoomDatabase() {
         fun createDatabase(context: Context) = Room.databaseBuilder(
             context = context,
             klass = ContactDatabase::class.java,
-            name = "MyContactsDatabase.db"
+            name = DATABASE_NAME
         ).build()
     }
 }

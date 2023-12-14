@@ -5,11 +5,12 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.example.sampleroomdatabase.data.Contact.Companion.DATABASE_NAME
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ContactDao {
-    @Query(value = "SELECT * FROM ContactsDB")
+    @Query(value = "SELECT * FROM $DATABASE_NAME")
     fun getAllContacts(): Flow<List<Contact>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
