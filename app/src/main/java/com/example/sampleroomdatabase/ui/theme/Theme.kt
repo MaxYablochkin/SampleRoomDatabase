@@ -2,6 +2,7 @@ package com.example.sampleroomdatabase.ui.theme
 
 import android.app.Activity
 import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
@@ -9,11 +10,7 @@ import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.SideEffect
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
@@ -30,29 +27,26 @@ private val LightColorScheme = lightColorScheme(
     primary = Purple40,
     secondary = PurpleGrey40,
     tertiary = Pink40
-
-    /* Other default colors to override
-    background = Color(0xFFFFFBFE),
-    surface = Color(0xFFFFFBFE),
-    onPrimary = Color.White,
-    onSecondary = Color.White,
-    onTertiary = Color.White,
-    onBackground = Color(0xFF1C1B1F),
-    onSurface = Color(0xFF1C1B1F),
-    */
 )
 
+@RequiresApi(Build.VERSION_CODES.S)
 @Composable
 fun SampleRoomDatabaseTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
     dynamicColor: Boolean = true,
+    amoledColor: Boolean = false,
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {
-        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
+        dynamicColor -> {
             val context = LocalContext.current
             if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
+        }
+
+        amoledColor && darkTheme  -> {
+            val context = LocalContext.current
+            dynamicDarkColorScheme(context).copy(background = Color.Black, surface = Color.Black)
         }
 
         darkTheme -> DarkColorScheme
@@ -71,41 +65,9 @@ fun SampleRoomDatabaseTheme(
         }
     }
 
-    /*MaterialTheme(
-        colorScheme = colorScheme,
-        typography = Typography,
-        content = content
-    )*/
-
-   /* val localDynamicColor = MaterialTheme.dynamicColor
-    val rememberedColorScheme = remember {
-        localDynamicColor.copy()
-    }.apply {
-        updateDynamicColorScheme(localDynamicColor)
-    }*/
-
     MaterialTheme(
         colorScheme = colorScheme,
         typography = Typography,
-    ) {
-        CompositionLocalProvider(
-            LocalDynamicColor provides DynamicColor(),
-            content = content
-        )
-    }
+        content = content
+    )
 }
-
-
-data class DynamicColor(var dynamicColor: Boolean = false)
-
-var LocalDynamicColor = staticCompositionLocalOf { DynamicColor() }
-
-val MaterialTheme.dynamicColor: DynamicColor
-    @Composable
-    @ReadOnlyComposable
-    get() = LocalDynamicColor.current
-
-/*
-internal fun DynamicColor.updateDynamicColorScheme(other: DynamicColor) {
-    dynamicColor = other.dynamicColor
-}*/
