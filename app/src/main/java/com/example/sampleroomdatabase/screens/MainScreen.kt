@@ -8,6 +8,8 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.Icon
@@ -69,6 +71,9 @@ fun MainScreen(
                         DeleteContactButton(contacts) {
                             contactViewModel.deleteSelectedContacts(it)
                         }
+                    }
+                    IconButton(onClick = { navController.navigate(Screens.SettingsScreen.destination) }) {
+                        Icon(imageVector = Icons.Default.Settings, contentDescription = null)
                     }
                 },
                 scrollBehavior = scrollBehavior

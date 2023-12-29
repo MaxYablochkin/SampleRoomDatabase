@@ -12,7 +12,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun SettingsWidget(
+fun Setting(
     nameSetting: String? = null,
     primaryName: String? = null,
     secondaryName: String? = null,

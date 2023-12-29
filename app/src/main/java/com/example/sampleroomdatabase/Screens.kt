@@ -79,6 +79,6 @@ fun AppNavHost(
     ) {
         composable(Screens.MainScreen.destination) { MainScreen(navController) }
         composable(Screens.CreateContactScreen.destination) { CreateContactScreen(navController) }
-        composable(Screens.SettingsScreen.destination) { SettingsScreen(navController, contactViewModel) }
+        composable(Screens.SettingsScreen.destination) { SettingsScreen(navController) }
     }
 }
