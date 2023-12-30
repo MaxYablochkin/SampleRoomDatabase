@@ -5,6 +5,11 @@ plugins {
 
     // Add Kotlin compiler plugin
     kotlin("kapt")
+    id("com.google.dagger.hilt.android")
+}
+
+kapt {
+    correctErrorTypes = true
 }
 
 android {
@@ -67,6 +72,11 @@ dependencies {
     val lifecycle_version = "2.6.2"
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycle_version")
 
+    // Dagger - Hilt
+    val dagger_version = "2.50"
+    implementation("com.google.dagger:hilt-android:$dagger_version")
+    kapt("com.google.dagger:hilt-android-compiler:$dagger_version")
+    /*kapt("com.google.dagger:hilt-compiler:$dagger_version")*/
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

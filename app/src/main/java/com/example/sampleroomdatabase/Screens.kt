@@ -15,6 +15,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.sampleroomdatabase.screens.CreateContactScreen
 import com.example.sampleroomdatabase.screens.MainScreen
 import com.example.sampleroomdatabase.screens.SettingsScreen
+import com.example.sampleroomdatabase.ui.theme.ThemeSettings
 
 sealed class Screens(val destination: String) {
     data object MainScreen : Screens("MainScreen")
@@ -25,7 +26,11 @@ sealed class Screens(val destination: String) {
 @RequiresApi(Build.VERSION_CODES.S)
 @Composable
 fun AppNavHost(
-    contactViewModel: ContactViewModel = viewModel(factory = ContactViewModel.factory)
+    contactViewModel: ContactViewModel = viewModel(factory = ContactViewModel.factory),
+    theme: ThemeSettings,
+    dynamicColor: Boolean,
+    amoledColor: Boolean,
+    userSettings: UserSettings
 ) {
     val navController = rememberNavController()
 
@@ -79,6 +84,14 @@ fun AppNavHost(
     ) {
         composable(Screens.MainScreen.destination) { MainScreen(navController) }
         composable(Screens.CreateContactScreen.destination) { CreateContactScreen(navController) }
-        composable(Screens.SettingsScreen.destination) { SettingsScreen(navController, contactViewModel) }
+        composable(Screens.SettingsScreen.destination) {
+            SettingsScreen(
+                navController = navController,
+                theme = theme,
+                dynamicColor = dynamicColor,
+                amoledColor = amoledColor,
+                userSettings = userSettings
+            )
+        }
     }
 }

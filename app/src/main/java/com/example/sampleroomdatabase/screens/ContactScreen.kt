@@ -90,8 +90,7 @@ fun CreateContactScreen(
                         DropdownMenu(
                             expanded = expanded,
                             onDismissRequest = { expanded = false },
-                            contacts = contacts,
-                            navController = navController
+                            contacts = contacts
                         )
                     }
                 }
