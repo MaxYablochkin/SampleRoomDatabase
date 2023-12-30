@@ -2,6 +2,7 @@ package com.example.sampleroomdatabase.ui.theme
 
 import android.app.Activity
 import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
@@ -32,22 +33,34 @@ private val LightColorScheme = lightColorScheme(
     tertiary = Pink40
 )
 
+@RequiresApi(Build.VERSION_CODES.S)
 @Composable
 fun SampleRoomDatabaseTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
-    dynamicColor: Boolean = true,
+    dynamicColor: Boolean = false,
+    amoledColor: Boolean = false,
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {
-        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
+        dynamicColor && !amoledColor -> {
             val context = LocalContext.current
             if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
+        }
+
+        darkTheme && amoledColor -> {
+            if (dynamicColor) {
+                val context = LocalContext.current
+                dynamicDarkColorScheme(context).copy(surface = Color.Black, background = Color.Black)
+            } else {
+                DarkColorScheme.copy(surface = Color.Black, background = Color.Black)
+            }
         }
 
         darkTheme -> DarkColorScheme
         else -> LightColorScheme
     }
+
     val view = LocalView.current
     if (!view.isInEditMode) {
         SideEffect {

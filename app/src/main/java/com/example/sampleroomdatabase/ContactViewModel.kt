@@ -3,7 +3,6 @@ package com.example.sampleroomdatabase
 import android.content.Context
 import android.util.Log
 import android.widget.Toast
-import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
@@ -16,15 +15,9 @@ import androidx.lifecycle.viewmodel.CreationExtras
 import com.example.sampleroomdatabase.data.Contact
 import com.example.sampleroomdatabase.data.ContactDatabase
 import com.example.sampleroomdatabase.data.preInitContacts
-import com.example.sampleroomdatabase.ui.theme.ThemeSettings
 import kotlinx.coroutines.launch
 
 class ContactViewModel(private val database: ContactDatabase) : ViewModel() {
-    var darkTheme by mutableStateOf(false)
-
-    var dynamicColor by mutableStateOf(false)
-//    var amoledColor by mutableStateOf(false)
-
     var selectedContacts: MutableList<Contact> = mutableStateListOf()
     var showToolsTopAppBar by mutableStateOf(false)
 

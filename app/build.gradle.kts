@@ -73,13 +73,10 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycle_version")
 
     // Dagger - Hilt
-    val dagger_version = "2.44"
+    val dagger_version = "2.50"
     implementation("com.google.dagger:hilt-android:$dagger_version")
     kapt("com.google.dagger:hilt-android-compiler:$dagger_version")
-
-//    kapt("androidx.hilt:hilt-compiler:1.1.0")
-//    implementation("androidx.hilt:hilt-navigation-compose:1.1.0")
-//    kapt("com.google.dagger:hilt-compiler:2.44")
+    /*kapt("com.google.dagger:hilt-compiler:$dagger_version")*/
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

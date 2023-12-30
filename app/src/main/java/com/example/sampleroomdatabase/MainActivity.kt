@@ -7,18 +7,12 @@ import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
-import androidx.compose.material3.Text
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import androidx.core.view.WindowCompat
-import com.example.sampleroomdatabase.components.DialogSwitchTheme
 import com.example.sampleroomdatabase.ui.theme.SampleRoomDatabaseTheme
 import com.example.sampleroomdatabase.ui.theme.ThemeSettings
 import dagger.hilt.android.AndroidEntryPoint
@@ -27,7 +21,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-    private val viewModel: ContactViewModel by viewModels(factoryProducer = { ContactViewModel.factory })
+    private val viewModel: ContactViewModel by viewModels()
 
     @Inject
     lateinit var userSettings: UserSettings
@@ -38,33 +32,30 @@ class MainActivity : ComponentActivity() {
         WindowCompat.setDecorFitsSystemWindows(window, false)
         setContent {
             val theme = userSettings.themeStream.collectAsState()
-
+            val dynamicColor = userSettings.dynamicColorStream.collectAsState()
+            val amoledColor = userSettings.amoledColorStream.collectAsState()
             val darkTheme = when (theme.value) {
-                ThemeSettings.LIGHT -> false
-                ThemeSettings.DARK -> true
-                ThemeSettings.SYSTEM -> isSystemInDarkTheme()
+                ThemeSettings.Light -> false
+                ThemeSettings.Dark -> true
+                ThemeSettings.System -> isSystemInDarkTheme()
             }
 
-            SampleRoomDatabaseTheme(darkTheme = darkTheme) {
-                var openDialog by remember { mutableStateOf(false) }
-
-                Button(onClick = { openDialog = true }, Modifier.padding(150.dp)) {
-                    Text(text = "Open dialog")
-                }
-                if (openDialog) {
-                    DialogSwitchTheme(
-                        onDismissRequest = { openDialog = false },
-                        selectedTheme = theme.value,
-                        onThemeSelected = { userSettings.theme = it }
-                    )
-                }
-
-               /* Surface(
+            SampleRoomDatabaseTheme(
+                darkTheme = darkTheme,
+                dynamicColor = dynamicColor.value,
+                amoledColor = amoledColor.value
+            ) {
+                Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    AppNavHost()
-                }*/
+                    AppNavHost(
+                        theme = theme.value,
+                        dynamicColor = dynamicColor.value,
+                        amoledColor = amoledColor.value,
+                        userSettings = userSettings
+                    )
+                }
             }
         }
     }

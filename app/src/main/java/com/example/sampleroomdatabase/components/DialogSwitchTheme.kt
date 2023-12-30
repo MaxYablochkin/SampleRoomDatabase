@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.selectableGroup
-import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.AlertDialogDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
@@ -64,7 +63,7 @@ internal fun DialogSwitchTheme(
 @Composable
 private fun RadioGroupSetting(
     modifier: Modifier = Modifier,
-    items: Iterable<ThemeItem>,
+    items: List<ThemeItem>,
     selected: Int,
     onItemSelected: ((Int) -> Unit)? = null
 ) {
@@ -101,17 +100,17 @@ private fun RadioGroupItem(
         verticalAlignment = Alignment.CenterVertically,
     ) {
         RadioButton(selected = selected, onClick = null)
-        Spacer(modifier = Modifier.width(10.dp))
+        Spacer(modifier = Modifier.width(15.dp))
         Text(text = item.title)
     }
 }
 
 data class ThemeItem(val id: Int, val title: String)
 
-private val themeItems = listOf(
-    ThemeItem(id = ThemeSettings.LIGHT.ordinal, title = "Light"),
-    ThemeItem(id = ThemeSettings.DARK.ordinal, title = "Dark"),
-    ThemeItem(id = ThemeSettings.SYSTEM.ordinal, title = "System default")
+internal val themeItems = listOf(
+    ThemeItem(id = ThemeSettings.Light.ordinal, title = "Light"),
+    ThemeItem(id = ThemeSettings.Dark.ordinal, title = "Dark"),
+    ThemeItem(id = ThemeSettings.System.ordinal, title = "System default")
 )
 
 private val DialogPadding = PaddingValues(all = 24.dp)

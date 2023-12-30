@@ -14,8 +14,8 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun Setting(
     nameSetting: String? = null,
-    primaryName: String? = null,
-    secondaryName: String? = null,
+    primaryText: String? = null,
+    secondaryText: String? = null,
     trailingContent: @Composable (() -> Unit)? = null,
     onClick: (() -> Unit)? = null
 ) {
@@ -30,8 +30,8 @@ fun Setting(
     }
     ListItem(
         modifier = Modifier.clickable { onClick?.invoke() },
-        headlineContent = { primaryName?.let { Text(it) } },
-        supportingContent = { secondaryName?.let { Text(it) } },
+        headlineContent = { primaryText?.let { Text(it) } },
+        supportingContent = { secondaryText?.let { Text(it) } },
         trailingContent = trailingContent
     )
 }
