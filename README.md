@@ -1,1 +1,1 @@
-# SampleRoomDatabase![Screenshot_1](https://github.com/MaxYablochkin/SampleRoomDatabase/assets/102767277/5e9668c5-eb01-452f-8c2b-c30d1830609e)
+![Sample](https://github.com/MaxYablochkin/SampleRoomDatabase/assets/102767277/30a9ab6d-5456-4b15-beaa-77e0d4defff2)
