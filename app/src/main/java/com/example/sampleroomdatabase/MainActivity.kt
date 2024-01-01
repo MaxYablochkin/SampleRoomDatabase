@@ -34,10 +34,20 @@ class MainActivity : ComponentActivity() {
             val theme = userSettings.themeStream.collectAsState()
             val dynamicColor = userSettings.dynamicColorStream.collectAsState()
             val amoledColor = userSettings.amoledColorStream.collectAsState()
+
             val darkTheme = when (theme.value) {
                 ThemeSettings.Light -> false
                 ThemeSettings.Dark -> true
                 ThemeSettings.System -> isSystemInDarkTheme()
+            }
+
+            /**
+             * If dark mode is turned off, then turn off AMOLED colors.
+             * This condition is external to all application screens,
+             * in order to avoid updating the user interface on a specific screen.
+             */
+            if (!darkTheme) {
+                userSettings.amoledColor = false
             }
 
             SampleRoomDatabaseTheme(

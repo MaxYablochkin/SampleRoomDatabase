@@ -74,13 +74,6 @@ fun SettingsScreen(
                 ThemeSettings.System -> isSystemInDarkTheme()
             }
 
-            /**
-             * If dark mode is turned off, then turn off AMOLED colors
-             */
-            if (!darkTheme) {
-                userSettings.amoledColor = false
-            }
-
             Setting(
                 nameSetting = "Theme",
                 primaryText = "Choose theme",
@@ -100,6 +93,9 @@ fun SettingsScreen(
                 )
             }
 
+            /**
+             * Dynamic color available from Android 12 and above.
+             */
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                 Setting(
                     nameSetting = "Color",
