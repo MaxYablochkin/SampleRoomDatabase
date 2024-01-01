@@ -12,25 +12,31 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.CreationExtras
+import com.example.sampleroomdatabase.components.selectRandomArgbColor
 import com.example.sampleroomdatabase.data.Contact
 import com.example.sampleroomdatabase.data.ContactDatabase
 import com.example.sampleroomdatabase.data.preInitContacts
 import kotlinx.coroutines.launch
 
 class ContactViewModel(private val database: ContactDatabase) : ViewModel() {
-    var selectedContacts: MutableList<Contact> = mutableStateListOf()
-    var showToolsTopAppBar by mutableStateOf(false)
-
-    private var contactEntity: Contact? = null
     var firstName by mutableStateOf("")
     var lastName by mutableStateOf("")
+    private var contactEntity: Contact? = null
+
+    var selectedContacts: MutableList<Contact> = mutableStateListOf()
+    var showToolsTopAppBar by mutableStateOf(false)
 
     val allContacts = database.contactDao.getAllContacts()
 
     private fun insertContact() = viewModelScope.launch {
-        val contact = contactEntity?.copy(firstName = firstName, lastName = lastName) ?: Contact(
+        val contact = contactEntity?.copy(
             firstName = firstName,
-            lastName = lastName
+            lastName = lastName,
+            avatarColor = selectRandomArgbColor()
+        ) ?: Contact(
+            firstName = firstName,
+            lastName = lastName,
+            avatarColor = selectRandomArgbColor()
         )
         database.contactDao.insertContact(contact)
         contactEntity = null

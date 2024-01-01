@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.sampleroomdatabase.data.Contact.Companion.DATABASE_NAME
 
-@Database(entities = [Contact::class], version = 1)
+@Database(entities = [Contact::class], version = 2)
 abstract class ContactDatabase : RoomDatabase() {
     abstract val contactDao: ContactDao
 
@@ -15,6 +15,6 @@ abstract class ContactDatabase : RoomDatabase() {
             context = context,
             klass = ContactDatabase::class.java,
             name = DATABASE_NAME
-        ).build()
+        ).fallbackToDestructiveMigration().build()
     }
 }

@@ -78,7 +78,6 @@ fun SettingsScreen(
                 nameSetting = "Theme",
                 primaryText = "Choose theme",
                 secondaryText = currentNameTheme,
-                /*secondaryName = theme.name,*/
                 onClick = { openDialog = true }
             )
 

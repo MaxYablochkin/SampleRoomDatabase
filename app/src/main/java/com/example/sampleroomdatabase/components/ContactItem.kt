@@ -25,7 +25,7 @@ internal fun ContactItem(
     contactViewModel: ContactViewModel = viewModel(factory = ContactViewModel.factory),
 ) {
     val defaultListItemColor = MaterialTheme.colorScheme.surface
-    val selectedListItemColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.6f)
+    val selectedListItemColor = MaterialTheme.colorScheme.surfaceVariant.copy(0.6f)
     var colorItemContact by remember { mutableStateOf(defaultListItemColor) }
 
     ListItem(
@@ -44,8 +44,8 @@ internal fun ContactItem(
                     contactViewModel.selectedContacts.remove(contact)
                 }
             ),
-        leadingContent = { CircleAvatar(contact.firstName, contact.lastName) },
-        headlineContent = { Text(text = "${contact.firstName} ${contact.lastName}") },
+        leadingContent = { CircleAvatar(contact.firstName, contact.lastName, contact.avatarColor) },
+        headlineContent = { Text("${contact.firstName} ${contact.lastName}") },
         colors = ListItemDefaults.colors(colorItemContact)
     )
 }
