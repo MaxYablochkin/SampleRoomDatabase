@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.sampleroomdatabase.data.Contact.Companion.DATABASE_NAME
 
-@Database(entities = [Contact::class], version = 2)
+@Database(entities = [Contact::class], version = 3)
 abstract class ContactDatabase : RoomDatabase() {
     abstract val contactDao: ContactDao
 

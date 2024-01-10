@@ -7,6 +7,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
@@ -23,7 +24,7 @@ class ContactViewModel(private val database: ContactDatabase) : ViewModel() {
     var lastName by mutableStateOf("")
     private var contactEntity: Contact? = null
 
-    var selectedContacts: MutableList<Contact> = mutableStateListOf()
+    var selectedContacts: SnapshotStateList<Contact> = mutableStateListOf()
     var showToolsTopAppBar by mutableStateOf(false)
 
     val allContacts = database.contactDao.getAllContacts()
@@ -66,6 +67,7 @@ class ContactViewModel(private val database: ContactDatabase) : ViewModel() {
                 }
             }
         }
+        clearSelectedContacts()
     }
 
     fun preInitContacts() = viewModelScope.launch {

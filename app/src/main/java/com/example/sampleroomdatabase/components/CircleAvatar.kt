@@ -24,21 +24,21 @@ internal fun CircleAvatar(firstName: String, lastName: String, avatarArgbColor: 
         contentAlignment = Alignment.Center
     ) {
         when {
-            firstName.isEmpty() -> Text(
+            firstName.isBlank() -> Text(
                 text = lastName.take(1).uppercase(),
-                fontSize = 23.sp,
+                fontSize = 25.sp,
                 color = MaterialTheme.colorScheme.background
             )
 
-            lastName.isEmpty() -> Text(
+            lastName.isBlank() -> Text(
                 text = firstName.take(1).uppercase(),
-                fontSize = 23.sp,
+                fontSize = 25.sp,
                 color = MaterialTheme.colorScheme.background
             )
 
             else -> Text(
                 text = firstName.take(1).uppercase(),
-                fontSize = 23.sp,
+                fontSize = 25.sp,
                 color = MaterialTheme.colorScheme.background
             )
         }

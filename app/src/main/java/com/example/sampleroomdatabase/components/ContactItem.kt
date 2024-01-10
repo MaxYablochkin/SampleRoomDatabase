@@ -3,6 +3,8 @@ package com.example.sampleroomdatabase.components
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.ListItemDefaults
@@ -14,6 +16,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.sampleroomdatabase.ContactViewModel
 import com.example.sampleroomdatabase.data.Contact
@@ -22,6 +26,7 @@ import com.example.sampleroomdatabase.data.Contact
 @Composable
 internal fun ContactItem(
     contact: Contact,
+    modifier: Modifier = Modifier,
     contactViewModel: ContactViewModel = viewModel(factory = ContactViewModel.factory),
 ) {
     val defaultListItemColor = MaterialTheme.colorScheme.surface
@@ -30,22 +35,39 @@ internal fun ContactItem(
 
     ListItem(
         modifier = Modifier
+            .padding(start = 60.dp, end = 20.dp)
+            .clip(RoundedCornerShape(15.dp))
             .combinedClickable(
                 interactionSource = MutableInteractionSource(),
                 indication = rememberRipple(),
                 onLongClick = {
                     colorItemContact = selectedListItemColor
-                    contactViewModel.showToolsTopAppBar = true
                     contactViewModel.selectedContacts.add(contact)
+                    contactViewModel.showToolsTopAppBar = true
                 },
                 onClick = {
                     colorItemContact = defaultListItemColor
-                    contactViewModel.showToolsTopAppBar = false
                     contactViewModel.selectedContacts.remove(contact)
+                    contactViewModel.showToolsTopAppBar = false
                 }
-            ),
-        leadingContent = { CircleAvatar(contact.firstName, contact.lastName, contact.avatarColor) },
-        headlineContent = { Text("${contact.firstName} ${contact.lastName}") },
+            )
+            .then(modifier),
+        leadingContent = {
+            CircleAvatar(
+                firstName = contact.firstName.toString(),
+                lastName = contact.lastName.toString(),
+                avatarArgbColor = contact.avatarColor
+            )
+        },
+        headlineContent = {
+            Text(
+                text = when {
+                    contact.firstName.toString().isBlank() -> contact.lastName
+                    contact.lastName.toString().isBlank() -> contact.firstName
+                    else -> "${contact.firstName} ${contact.lastName}"
+                }.toString()
+            )
+        },
         colors = ListItemDefaults.colors(colorItemContact)
     )
 }

@@ -80,7 +80,14 @@ fun CreateContactScreen(
                     }
                 },
                 actions = {
-                    Button(onClick = { contactViewModel.saveContact(localContext) { navController.popBackStack() } }) {
+                    Button(
+                        onClick = {
+                            contactViewModel.saveContact(
+                                context = localContext,
+                                popBackStack = { navController.popBackStack() }
+                            )
+                        }
+                    ) {
                         Text("Save")
                     }
                     IconButton(onClick = { expanded = true }) {

@@ -10,8 +10,8 @@ data class Contact(
     @PrimaryKey(autoGenerate = true)
     val id: Int? = null,
     @ColumnInfo(name = "first_name")
-    val firstName: String,
-    val lastName: String,
+    val firstName: String? = "",
+    val lastName: String? = "",
     val avatarColor: Long
 ) {
     companion object {
