@@ -1,6 +1,8 @@
 package com.example.sampleroomdatabase.screens
 
+import androidx.compose.animation.AnimatedContent
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -70,27 +72,33 @@ fun MainScreen(
         topBar = {
             TopAppBar(
                 title = {
-                    if (contactViewModel.selectedContacts.size < 1) {
-                        Text("Contacts")
-                    } else {
-                        Text("${contactViewModel.selectedContacts.size} selected")
+                    AnimatedContent(contactViewModel.selectedContacts.size < 1) {
+                        if (it) {
+                            Text("Contacts")
+                        } else {
+                            Text("${contactViewModel.selectedContacts.size} selected")
+                        }
                     }
                 },
                 navigationIcon = {
-                    if (contactViewModel.selectedContacts.size < 1) {
-                        null
-                    } else {
-                        IconButton(onClick = { contactViewModel.clearSelectedContacts() }) {
-                            Icon(Icons.Default.Close, null)
+                    AnimatedContent(contactViewModel.selectedContacts.size < 1) {
+                        if (it) {
+                            null
+                        } else {
+                            IconButton(onClick = { contactViewModel.clearSelectedContacts() }) {
+                                Icon(Icons.Default.Close, null)
+                            }
                         }
                     }
                 },
                 actions = {
-                    if (contactViewModel.selectedContacts.size < 1) {
-                        null
-                    } else {
-                        DeleteContactButton(contacts) {
-                            contactViewModel.deleteSelectedContacts(it)
+                    AnimatedContent(contactViewModel.selectedContacts.size < 1) {
+                        if (it) {
+                            null
+                        } else {
+                            DeleteContactButton(contacts) { listContact ->
+                                contactViewModel.deleteSelectedContacts(listContact)
+                            }
                         }
                     }
                     IconButton(onClick = { navController.navigate(Screens.SettingsScreen.destination) }) {
@@ -120,7 +128,8 @@ fun MainScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(innerPadding),
-            state = listState
+            state = listState,
+            verticalArrangement = Arrangement.spacedBy(5.dp)
         ) {
             item { CreateContactItem(navController) }
             groupedContacts.forEach { (letter, sortedGroupedContacts) ->

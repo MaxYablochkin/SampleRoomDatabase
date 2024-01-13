@@ -110,7 +110,7 @@ fun CreateContactScreen(
                 .padding(innerPadding),
             contentPadding = PaddingValues(30.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(20.dp)
+            verticalArrangement = Arrangement.spacedBy(20.dp),
         ) {
             item {
                 Box(

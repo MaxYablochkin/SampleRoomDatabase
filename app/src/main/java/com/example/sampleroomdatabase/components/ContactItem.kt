@@ -1,5 +1,8 @@
 package com.example.sampleroomdatabase.components
 
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.spring
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -17,6 +20,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.sampleroomdatabase.ContactViewModel
@@ -32,6 +36,11 @@ internal fun ContactItem(
     val defaultListItemColor = MaterialTheme.colorScheme.surface
     val selectedListItemColor = MaterialTheme.colorScheme.surfaceVariant.copy(0.6f)
     var colorItemContact by remember { mutableStateOf(defaultListItemColor) }
+    val animateColorItemContact: Color by animateColorAsState(
+        targetValue = if (colorItemContact == selectedListItemColor) selectedListItemColor else defaultListItemColor,
+        animationSpec = spring(Spring.DampingRatioNoBouncy, Spring.StiffnessMediumLow),
+        label = "ColorContactAnimation"
+    )
 
     ListItem(
         modifier = Modifier
@@ -68,6 +77,6 @@ internal fun ContactItem(
                 }.toString()
             )
         },
-        colors = ListItemDefaults.colors(colorItemContact)
+        colors = ListItemDefaults.colors(animateColorItemContact)
     )
 }

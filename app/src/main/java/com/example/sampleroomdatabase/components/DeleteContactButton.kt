@@ -9,10 +9,10 @@ import com.example.sampleroomdatabase.data.Contact
 
 @Composable
 internal fun DeleteContactButton(
-    selectedContacts: List<Contact>,
+    contacts: List<Contact>,
     onClickDelete: (List<Contact>) -> Unit
 ) {
-    IconButton(onClick = { onClickDelete(selectedContacts) }) {
+    IconButton(onClick = { onClickDelete(contacts) }) {
         Icon(Icons.Default.Delete, "")
     }
 }
