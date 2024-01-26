@@ -53,10 +53,9 @@ android {
     }
     buildFeatures {
         compose = true
-        viewBinding = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
+        kotlinCompilerExtensionVersion = "1.5.8"
     }
     packaging {
         resources {
@@ -84,6 +83,9 @@ dependencies {
     implementation("com.google.dagger:hilt-android:$dagger_version")
     kapt("com.google.dagger:hilt-android-compiler:$dagger_version")
     /*kapt("com.google.dagger:hilt-compiler:$dagger_version")*/
+
+    val material_icons_version = "1.5.4"
+    implementation("androidx.compose.material:material-icons-extended:$material_icons_version")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

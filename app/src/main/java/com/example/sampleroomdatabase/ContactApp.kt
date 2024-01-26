@@ -1,7 +1,7 @@
 package com.example.sampleroomdatabase
 
 import android.app.Application
-import com.example.sampleroomdatabase.data.ContactDatabase
+import com.example.sampleroomdatabase.data.database.ContactDatabase
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp

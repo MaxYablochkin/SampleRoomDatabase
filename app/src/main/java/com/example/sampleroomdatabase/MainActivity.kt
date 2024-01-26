@@ -13,8 +13,11 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.core.view.WindowCompat
-import com.example.sampleroomdatabase.ui.theme.SampleRoomDatabaseTheme
-import com.example.sampleroomdatabase.ui.theme.ThemeSettings
+import com.example.sampleroomdatabase.data.settings.ThemeSettings
+import com.example.sampleroomdatabase.data.settings.UserSettings
+import com.example.sampleroomdatabase.navigation.AppNavHost
+import com.example.sampleroomdatabase.presentation.ContactViewModel
+import com.example.sampleroomdatabase.presentation.ui.theme.SampleRoomDatabaseTheme
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -63,7 +66,7 @@ class MainActivity : ComponentActivity() {
                         theme = theme.value,
                         dynamicColor = dynamicColor.value,
                         amoledColor = amoledColor.value,
-                        userSettings = userSettings
+                        userSettings = userSettings,
                     )
                 }
             }
