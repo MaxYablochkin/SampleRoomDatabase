@@ -87,6 +87,9 @@ dependencies {
     val material_icons_version = "1.5.4"
     implementation("androidx.compose.material:material-icons-extended:$material_icons_version")
 
+    val splashscreen_version = "1.0.1"
+    implementation("androidx.core:core-splashscreen:$splashscreen_version")
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)

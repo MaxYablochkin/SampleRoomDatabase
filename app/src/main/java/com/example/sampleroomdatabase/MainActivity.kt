@@ -12,6 +12,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
 import com.example.sampleroomdatabase.data.settings.ThemeSettings
 import com.example.sampleroomdatabase.data.settings.UserSettings
@@ -32,6 +33,7 @@ class MainActivity : ComponentActivity() {
     @RequiresApi(Build.VERSION_CODES.S)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        installSplashScreen()
         WindowCompat.setDecorFitsSystemWindows(window, false)
         setContent {
             val theme = userSettings.themeStream.collectAsState()
