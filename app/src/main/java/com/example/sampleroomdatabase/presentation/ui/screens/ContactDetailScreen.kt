@@ -15,14 +15,14 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.outlined.Message
 import androidx.compose.material.icons.filled.Business
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.outlined.Call
 import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material.icons.outlined.Email
 import androidx.compose.material.icons.outlined.Mail
-import androidx.compose.material.icons.outlined.Message
 import androidx.compose.material.icons.outlined.Phone
 import androidx.compose.material.icons.outlined.Star
 import androidx.compose.material.icons.outlined.VideoCameraFront
@@ -70,7 +70,7 @@ fun ContactDetailScreen(
             TopAppBar(
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
-                        Icon(Icons.Default.ArrowBack, "")
+                        Icon(Icons.AutoMirrored.Default.ArrowBack, "")
                     }
                 },
                 title = {
@@ -185,7 +185,7 @@ fun ContactDetailScreen(
                             ActionButton(
                                 modifier = Modifier.weight(1f),
                                 text = "Text",
-                                icon = Icons.Outlined.Message,
+                                icon = Icons.AutoMirrored.Outlined.Message,
                                 contentDescription = "message"
                             )
                             ActionButton(

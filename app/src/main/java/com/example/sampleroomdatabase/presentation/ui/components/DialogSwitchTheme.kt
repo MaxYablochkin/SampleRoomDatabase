@@ -45,7 +45,7 @@ internal fun DialogSwitchTheme(
                 )
                 RadioGroupSetting(
                     modifier = Modifier.padding(ContentPadding),
-                    items = themeItems,
+                    items = ThemeItem.themeItems,
                     selected = selectedTheme.ordinal,
                     onItemSelected = { onThemeSelected(ThemeSettings.fromOrdinal(it)) }
                 )
@@ -102,13 +102,15 @@ private fun RadioGroupItem(
     }
 }
 
-data class ThemeItem(val id: Int, val title: String)
-
-internal val themeItems = listOf(
-    ThemeItem(id = ThemeSettings.Light.ordinal, title = "Light"),
-    ThemeItem(id = ThemeSettings.Dark.ordinal, title = "Dark"),
-    ThemeItem(id = ThemeSettings.System.ordinal, title = "System default")
-)
+data class ThemeItem(val id: Int, val title: String) {
+    companion object {
+        internal val themeItems = listOf(
+            ThemeItem(id = ThemeSettings.Light.ordinal, title = "Light"),
+            ThemeItem(id = ThemeSettings.Dark.ordinal, title = "Dark"),
+            ThemeItem(id = ThemeSettings.System.ordinal, title = "System default")
+        )
+    }
+}
 
 private val DialogPadding = PaddingValues(all = 24.dp)
 private val TitlePadding = PaddingValues(bottom = 16.dp)

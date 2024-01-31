@@ -4,9 +4,9 @@ import kotlinx.coroutines.flow.StateFlow
 
 interface UserSettings {
     var theme: ThemeSettings
-    val themeStream: StateFlow<ThemeSettings>
+    val themeStateFlow: StateFlow<ThemeSettings>
     var dynamicColor: Boolean
-    val dynamicColorStream: StateFlow<Boolean>
+    val dynamicColorStateFlow: StateFlow<Boolean>
     var amoledColor: Boolean
-    val amoledColorStream: StateFlow<Boolean>
+    val amoledColorStateFlow: StateFlow<Boolean>
 }

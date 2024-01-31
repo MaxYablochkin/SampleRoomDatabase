@@ -10,5 +10,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 
 @Composable
-fun Modifier.fillMaxWidthInHorizontal() =
-    fillMaxWidth().windowInsetsPadding(WindowInsets.systemBars.only(WindowInsetsSides.Horizontal))
+fun Modifier.fillMaxWidthInHorizontal() = this
+    .fillMaxWidth()
+    .windowInsetsPadding(WindowInsets.systemBars.only(WindowInsetsSides.Horizontal))

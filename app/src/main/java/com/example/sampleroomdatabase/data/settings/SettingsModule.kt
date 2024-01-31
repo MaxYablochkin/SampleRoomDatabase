@@ -11,5 +11,5 @@ import javax.inject.Singleton
 abstract class SettingsModule {
     @Binds
     @Singleton
-    abstract fun bindUserSettings(userSettingsImpl: ThemeSettingsImpl): UserSettings
+    abstract fun bindUserSettings(userSettingsImpl: UserSettingsImpl): UserSettings
 }

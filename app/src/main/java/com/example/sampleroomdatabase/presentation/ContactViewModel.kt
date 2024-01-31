@@ -83,7 +83,10 @@ class ContactViewModel(private val database: ContactDatabase) : ViewModel() {
         fakeContacts.forEach {
             val preInitContact = it.copy(
                 firstName = it.firstName.trim(),
-                lastName = it.lastName.trim()
+                lastName = it.lastName.trim(),
+                mobileNumber = it.mobileNumber.trim(),
+                email = it.email.trim(),
+                companyName = it.companyName.trim()
             )
             database.contactDao.insertContact(preInitContact)
         }

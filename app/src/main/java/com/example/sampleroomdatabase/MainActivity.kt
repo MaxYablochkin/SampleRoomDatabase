@@ -36,9 +36,9 @@ class MainActivity : ComponentActivity() {
         installSplashScreen()
         WindowCompat.setDecorFitsSystemWindows(window, false)
         setContent {
-            val theme = userSettings.themeStream.collectAsState()
-            val dynamicColor = userSettings.dynamicColorStream.collectAsState()
-            val amoledColor = userSettings.amoledColorStream.collectAsState()
+            val theme = userSettings.themeStateFlow.collectAsState()
+            val dynamicColor = userSettings.dynamicColorStateFlow.collectAsState()
+            val amoledColor = userSettings.amoledColorStateFlow.collectAsState()
 
             val darkTheme = when (theme.value) {
                 ThemeSettings.Light -> false

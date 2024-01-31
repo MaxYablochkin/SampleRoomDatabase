@@ -9,25 +9,25 @@ import javax.inject.Inject
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 
-class ThemeSettingsImpl @Inject constructor(
+class UserSettingsImpl @Inject constructor(
     @ApplicationContext context: Context
 ) : UserSettings {
 
-    override val themeStream: MutableStateFlow<ThemeSettings>
+    override val themeStateFlow: MutableStateFlow<ThemeSettings>
     override var theme: ThemeSettings by ThemePreferenceDelegate("current_theme", ThemeSettings.System)
 
-    override val dynamicColorStream: MutableStateFlow<Boolean>
+    override val dynamicColorStateFlow: MutableStateFlow<Boolean>
     override var dynamicColor: Boolean by DynamicColorPreferenceDelegate("dynamic_color", false)
 
-    override val amoledColorStream: MutableStateFlow<Boolean>
+    override val amoledColorStateFlow: MutableStateFlow<Boolean>
     override var amoledColor: Boolean by AmoledColorPreferenceDelegate("amoled_color", false)
 
     private val preferences: SharedPreferences = context.getSharedPreferences("contact_theme", Context.MODE_PRIVATE)
 
     init {
-        themeStream = MutableStateFlow(theme)
-        dynamicColorStream = MutableStateFlow(dynamicColor)
-        amoledColorStream = MutableStateFlow(amoledColor)
+        themeStateFlow = MutableStateFlow(theme)
+        dynamicColorStateFlow = MutableStateFlow(dynamicColor)
+        amoledColorStateFlow = MutableStateFlow(amoledColor)
     }
 
     inner class ThemePreferenceDelegate(
@@ -39,7 +39,7 @@ class ThemeSettingsImpl @Inject constructor(
         }
 
         override fun setValue(thisRef: Any?, property: KProperty<*>, value: ThemeSettings) {
-            themeStream.value = value
+            themeStateFlow.value = value
             preferences.edit {
                 putInt(name, value.ordinal)
             }
@@ -55,7 +55,7 @@ class ThemeSettingsImpl @Inject constructor(
         }
 
         override fun setValue(thisRef: Any?, property: KProperty<*>, value: Boolean) {
-            dynamicColorStream.value = value
+            dynamicColorStateFlow.value = value
             preferences.edit {
                 putBoolean(name, value)
             }
@@ -72,7 +72,7 @@ class ThemeSettingsImpl @Inject constructor(
         }
 
         override fun setValue(thisRef: Any?, property: KProperty<*>, value: Boolean) {
-            amoledColorStream.value = value
+            amoledColorStateFlow.value = value
             preferences.edit {
                 putBoolean(name, value)
             }
