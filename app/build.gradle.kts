@@ -86,7 +86,7 @@ dependencies {
     kapt("com.google.dagger:hilt-android-compiler:$dagger_version")
     /*kapt("com.google.dagger:hilt-compiler:$dagger_version")*/
 
-    val material_icons_version = "1.5.4"
+    val material_icons_version = "1.6.0"
     implementation("androidx.compose.material:material-icons-extended:$material_icons_version")
 
     val splashscreen_version = "1.0.1"

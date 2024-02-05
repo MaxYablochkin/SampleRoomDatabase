@@ -1,6 +1,7 @@
 package com.example.sampleroomdatabase.presentation.ui.components
 
-import androidx.compose.foundation.layout.Arrangement
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -9,21 +10,25 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.selectableGroup
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.AlertDialogDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewDynamicColors
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.example.sampleroomdatabase.data.settings.ThemeSettings
+import com.example.sampleroomdatabase.presentation.ui.theme.SampleRoomDatabaseTheme
 
 @Composable
 internal fun DialogSwitchTheme(
@@ -36,7 +41,11 @@ internal fun DialogSwitchTheme(
             shape = AlertDialogDefaults.shape,
             tonalElevation = AlertDialogDefaults.TonalElevation,
         ) {
-            Column(modifier = Modifier.padding(DialogPadding)) {
+            Column(
+                modifier = Modifier
+                    .padding(DialogPadding)
+                    .verticalScroll(rememberScrollState())
+            ) {
                 Text(
                     text = "Choose theme",
                     style = MaterialTheme.typography.headlineSmall,
@@ -49,9 +58,11 @@ internal fun DialogSwitchTheme(
                     selected = selectedTheme.ordinal,
                     onItemSelected = { onThemeSelected(ThemeSettings.fromOrdinal(it)) }
                 )
-                Row(Modifier.fillMaxWidth(), Arrangement.End) {
-                    TextButton(onClick = onDismissRequest) { Text("Cancel") }
-                }
+                HyperlinkText(
+                    text = InfoBottomContent,
+                    linkText = listOf("screen and display settings"),
+                    hyperlinks = listOf("https://support.google.com/android/answer/9730472?hl=en")
+                )
             }
         }
     }
@@ -98,7 +109,7 @@ private fun RadioGroupItem(
     ) {
         RadioButton(selected = selected, onClick = null)
         Spacer(modifier = Modifier.width(15.dp))
-        Text(text = item.title)
+        Text(text = item.title, color = MaterialTheme.colorScheme.onSurfaceVariant)
     }
 }
 
@@ -114,4 +125,20 @@ data class ThemeItem(val id: Int, val title: String) {
 
 private val DialogPadding = PaddingValues(all = 24.dp)
 private val TitlePadding = PaddingValues(bottom = 16.dp)
-private val ContentPadding = PaddingValues(bottom = 24.dp)
+private val ContentPadding = PaddingValues(bottom = 10.dp)
+private const val InfoBottomContent =
+    "To change the theme of your Tasks widget and notifications, manage your Android screen and display settings."
+
+@RequiresApi(Build.VERSION_CODES.S)
+@Preview
+@PreviewDynamicColors
+@Composable
+fun PreviewDialogSwitchTheme() {
+    SampleRoomDatabaseTheme(darkTheme = true, dynamicColor = true, amoledColor = false) {
+        DialogSwitchTheme(
+            onDismissRequest = { },
+            selectedTheme = ThemeSettings.System,
+            onThemeSelected = { }
+        )
+    }
+}

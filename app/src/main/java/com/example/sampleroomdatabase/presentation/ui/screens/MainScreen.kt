@@ -124,7 +124,6 @@ fun MainScreen(
                 icon = { Icon(Icons.Default.Add, "") },
                 text = { Text("Add contact") },
                 expanded = extendedFab,
-                containerColor = MaterialTheme.colorScheme.secondaryContainer,
             )
         },
     ) { innerPadding ->
