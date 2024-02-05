@@ -1,4 +1,4 @@
-### APK https://bit.ly/42q7YHt
+### APK https://bit.ly/3SP6rYA
 <hr>
 
 ![Screenshot_1](https://github.com/MaxYablochkin/SampleRoomDatabase/assets/102767277/4d62de78-64de-4dd0-983d-b3fa4c8e9498)
