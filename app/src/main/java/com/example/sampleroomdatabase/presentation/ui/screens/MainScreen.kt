@@ -1,11 +1,13 @@
 package com.example.sampleroomdatabase.presentation.ui.screens
 
 import androidx.compose.animation.AnimatedContent
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -22,15 +24,17 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.derivedStateOf
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.example.sampleroomdatabase.R
 import com.example.sampleroomdatabase.data.database.Contact
 import com.example.sampleroomdatabase.navigation.Screens
 import com.example.sampleroomdatabase.presentation.ContactViewModel
@@ -38,7 +42,7 @@ import com.example.sampleroomdatabase.presentation.ui.components.ContactItem
 import com.example.sampleroomdatabase.presentation.ui.components.CreateContactItem
 import com.example.sampleroomdatabase.presentation.ui.components.DeleteContactButton
 import com.example.sampleroomdatabase.presentation.ui.components.ListHeader
-import com.example.sampleroomdatabase.presentation.ui.theme.applyTonalElevation
+import com.example.sampleroomdatabase.presentation.ui.isScrollingUp
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
@@ -51,7 +55,6 @@ fun MainScreen(
 ) {
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
     val listState = rememberLazyListState()
-    val extendedFab by remember { derivedStateOf { listState.firstVisibleItemIndex == 0 } }
 
     val sortedContacts = contacts.sortedBy {
         if (it.firstName.isBlank()) {
@@ -78,9 +81,16 @@ fun MainScreen(
                 title = {
                     AnimatedContent(contactViewModel.selectedContacts.size < 1) {
                         if (it) {
-                            Text("Contacts")
+                            Row(verticalAlignment = Alignment.CenterVertically) {
+                                Image(
+                                    painter = painterResource(R.drawable.new_ic_launcher_foreground),
+                                    contentDescription = stringResource(R.string.image_on_the_top_appbar),
+                                    modifier = Modifier.size(48.dp),
+                                )
+                                Text(text = stringResource(R.string.title_on_main_screen))
+                            }
                         } else {
-                            Text("${contactViewModel.selectedContacts.size} selected")
+                            Text("${contactViewModel.selectedContacts.size} ${stringResource(R.string.selected_contacts)}")
                         }
                     }
                 },
@@ -90,7 +100,10 @@ fun MainScreen(
                             null
                         } else {
                             IconButton(onClick = { contactViewModel.clearSelectedContacts() }) {
-                                Icon(Icons.Default.Close, null)
+                                Icon(
+                                    imageVector = Icons.Default.Close,
+                                    contentDescription = stringResource(R.string.clear_selected_contacts)
+                                )
                             }
                         }
                     }
@@ -106,24 +119,26 @@ fun MainScreen(
                         }
                     }
                     IconButton(onClick = { navController.navigate(Screens.SettingsScreen.destination) }) {
-                        Icon(imageVector = Icons.Default.Settings, contentDescription = null)
+                        Icon(
+                            imageVector = Icons.Default.Settings,
+                            contentDescription = stringResource(R.string.go_to_the_settings_screen)
+                        )
                     }
                 },
                 scrollBehavior = scrollBehavior,
                 colors = TopAppBarDefaults.topAppBarColors(
-                    scrolledContainerColor = MaterialTheme.colorScheme.applyTonalElevation(
-                        backgroundColor = MaterialTheme.colorScheme.surface,
-                        elevation = 0.dp
-                    )
+                    scrolledContainerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(0.dp)
                 )
             )
         },
         floatingActionButton = {
             ExtendedFloatingActionButton(
                 onClick = { navController.navigate(Screens.CreateContactScreen.destination) },
-                icon = { Icon(Icons.Default.Add, "") },
-                text = { Text("Add contact") },
-                expanded = extendedFab,
+                icon = { Icon(Icons.Default.Add, stringResource(R.string.go_to_the_create_contact_screen)) },
+                text = { Text(text = stringResource(R.string.btn_create_contact)) },
+                expanded = listState.isScrollingUp(),
+                containerColor = MaterialTheme.colorScheme.surface,
+                contentColor = MaterialTheme.colorScheme.primary,
             )
         },
     ) { innerPadding ->

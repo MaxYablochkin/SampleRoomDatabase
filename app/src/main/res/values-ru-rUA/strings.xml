@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SampleRoomDatabase</string>
+
+    <!--MainScreen-->
+    <string name="image_on_the_top_appbar">Значок приложения</string>
+    <string name="title_on_main_screen">Контакты</string>
+    <string name="go_to_the_settings_screen">Открыть экран настроек</string>
+    <string name="selected_contacts">выбрано</string>
+    <string name="btn_create_contact">Добавить контакт</string>
+    <string name="btn_create_contact_in_list">Создать новый контакт</string>
+    <string name="animate_color_label">ЦветАнимацииКонтакта</string>
+    <string name="go_to_the_create_contact_screen">Открыть экран создания контакта</string>
+    <string name="add_contact_in_selected_list">Вы добавили контакт в выбранный список для удаления</string>
+    <string name="remove_contact_in_selected_list">Вы удалили выбранный контакт из выбранного списка</string>
+    <string name="clear_selected_contacts">Очистить выбранные контакты</string>
+
+    <!--CreateContactScreen-->
+    <string name="close_create_contact_screen">Закрыть экран создания контакта</string>
+    <string name="title_on_create_contact_screen">Создать контакт</string>
+    <string name="save_contact">Сохранить</string>
+    <string name="add_fake_contacts">Добавить поддельные контакты</string>
+    <string name="delete_all_contacts">Удалить все контакты</string>
+    <string name="first_name">Имя</string>
+    <string name="last_name">Фамилия</string>
+    <string name="more_fields">Больше полей</string>
+    <string name="mobile">Мобильный</string>
+    <string name="email">Электронная почта</string>
+    <string name="company">Компания</string>
+    <string name="toast_message">Имя и фамилия пустые</string>
+    <string name="dialog_saving_contact_text">Ваши изменения не сохранены</string>
+    <string name="btn_discard">Отменить</string>
+    <string name="more_options">Больше вариантов</string>
+
+    <!--ContactDetailScreen-->
+    <string name="close_contact_detail_screen">Закрыть экран сведений о контакте</string>
+    <string name="delete_contact">Удалить</string>
+    <string name="btn_call">Вызов</string>
+    <string name="btn_text">Отправить сообщение</string>
+    <string name="btn_video">Видеозвонок</string>
+    <string name="btn_email">Электронная почта</string>
+    <string name="contact_info">Контактная информация</string>
+    <string name="mobile_info">Мобильный</string>
+    <string name="email_info">Электронная почта</string>
+    <string name="company_info">Компания</string>
+    <string name="about_person">О</string>
+
+    <!--SettingsScreen-->
+    <string name="title_on_settings_screen">Настройки</string>
+    <string name="close_settings_screen">Закрыть экран настроек</string>
+    <string name="name_setting_theme">Тема</string>
+    <string name="primary_text_theme">Выбрать тему</string>
+    <string-array name="secondary_text_theme">
+        <item>Светлая</item>
+        <item>Тёмная</item>
+        <item>Системная по умолчанию</item>
+    </string-array>
+    <string name="name_setting_color">Цвет</string>
+    <string name="primary_text_color">Динамические цвета</string>
+    <string name="secondary_text_color">Android 12+</string>
+    <string name="primary_text_amoled">AMOLED</string>
+    <string name="info_bottom_content">
+        Чтобы изменить тему виджета «Задачи» и уведомлений, управляйте настройками экрана и дисплея Android.
+    </string>
+    <string name="link_text">настройками экрана и дисплея</string>
+
+</resources>

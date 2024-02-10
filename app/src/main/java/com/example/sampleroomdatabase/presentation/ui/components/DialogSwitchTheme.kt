@@ -22,11 +22,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewDynamicColors
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
+import com.example.sampleroomdatabase.R
 import com.example.sampleroomdatabase.data.settings.ThemeSettings
 import com.example.sampleroomdatabase.presentation.ui.theme.SampleRoomDatabaseTheme
 
@@ -47,7 +50,7 @@ internal fun DialogSwitchTheme(
                     .verticalScroll(rememberScrollState())
             ) {
                 Text(
-                    text = "Choose theme",
+                    text = stringResource(R.string.primary_text_theme),
                     style = MaterialTheme.typography.headlineSmall,
                     color = MaterialTheme.colorScheme.onSurface,
                     modifier = Modifier.padding(TitlePadding)
@@ -59,8 +62,8 @@ internal fun DialogSwitchTheme(
                     onItemSelected = { onThemeSelected(ThemeSettings.fromOrdinal(it)) }
                 )
                 HyperlinkText(
-                    text = InfoBottomContent,
-                    linkText = listOf("screen and display settings"),
+                    text = stringResource(R.string.info_bottom_content),
+                    linkText = listOf(stringResource(R.string.link_text)),
                     hyperlinks = listOf("https://support.google.com/android/answer/9730472?hl=en")
                 )
             }
@@ -115,19 +118,22 @@ private fun RadioGroupItem(
 
 data class ThemeItem(val id: Int, val title: String) {
     companion object {
-        internal val themeItems = listOf(
-            ThemeItem(id = ThemeSettings.Light.ordinal, title = "Light"),
-            ThemeItem(id = ThemeSettings.Dark.ordinal, title = "Dark"),
-            ThemeItem(id = ThemeSettings.System.ordinal, title = "System default")
-        )
+        internal val themeItems
+            @Composable
+            get() = listOf(
+                ThemeItem(id = ThemeSettings.Light.ordinal, title = themeNames[0]),
+                ThemeItem(id = ThemeSettings.Dark.ordinal, title = themeNames[1]),
+                ThemeItem(id = ThemeSettings.System.ordinal, title = themeNames[2])
+            )
     }
 }
 
 private val DialogPadding = PaddingValues(all = 24.dp)
 private val TitlePadding = PaddingValues(bottom = 16.dp)
 private val ContentPadding = PaddingValues(bottom = 10.dp)
-private const val InfoBottomContent =
-    "To change the theme of your Tasks widget and notifications, manage your Android screen and display settings."
+val themeNames: Array<String>
+    @Composable
+    get() = LocalContext.current.resources.getStringArray(R.array.secondary_text_theme)
 
 @RequiresApi(Build.VERSION_CODES.S)
 @Preview

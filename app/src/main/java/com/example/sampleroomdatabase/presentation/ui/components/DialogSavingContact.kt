@@ -16,9 +16,11 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.sampleroomdatabase.R
 import com.example.sampleroomdatabase.presentation.ContactViewModel
 
 @Composable
@@ -36,7 +38,7 @@ internal fun DialogSavingContact(
         ) {
             Column(modifier = Modifier.padding(DialogPadding)) {
                 Text(
-                    text = "Your changes have not been saved",
+                    text = stringResource(R.string.dialog_saving_contact_text),
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     modifier = Modifier.padding(ContentPadding)
@@ -51,7 +53,7 @@ internal fun DialogSavingContact(
                             popBackStack()
                         }
                     ) {
-                        Text("Discard")
+                        Text(text = stringResource(R.string.btn_discard))
                     }
                     Spacer(modifier = Modifier.width(8.dp))
                     TextButton(
@@ -63,7 +65,7 @@ internal fun DialogSavingContact(
                             )
                         }
                     ) {
-                        Text("Save")
+                        Text(text = stringResource(R.string.save_contact))
                     }
                 }
             }

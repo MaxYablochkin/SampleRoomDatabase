@@ -1,7 +1,6 @@
 package com.example.sampleroomdatabase.presentation.ui.components
 
 import android.os.Build
-import android.os.VibrationEffect
 import androidx.annotation.RequiresApi
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.Spring
@@ -25,8 +24,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.sampleroomdatabase.R
 import com.example.sampleroomdatabase.data.database.Contact
 import com.example.sampleroomdatabase.presentation.ContactViewModel
 
@@ -40,13 +41,17 @@ internal fun ContactItem(
     contactViewModel: ContactViewModel = viewModel(factory = ContactViewModel.factory),
 ) {
     val hapticFeedback = LocalHapticFeedback.current
-    val defaultListItemColor = MaterialTheme.colorScheme.surface
-    val selectedListItemColor = MaterialTheme.colorScheme.surfaceVariant.copy(0.6f)
-    var colorItemContact by remember { mutableStateOf(defaultListItemColor) }
+    val defaultColorItemContact = MaterialTheme.colorScheme.surface
+    val selectedColorItemContact = MaterialTheme.colorScheme.surfaceVariant.copy(0.6f)
+    var colorItemContact by remember { mutableStateOf(defaultColorItemContact) }
     val animateColorItemContact by animateColorAsState(
-        targetValue = if (colorItemContact == selectedListItemColor) selectedListItemColor else defaultListItemColor,
+        targetValue = when {
+            !contactViewModel.selectedContacts.contains(contact) -> defaultColorItemContact
+            colorItemContact == selectedColorItemContact -> selectedColorItemContact
+            else -> defaultColorItemContact
+        },
         animationSpec = spring(Spring.DampingRatioNoBouncy, Spring.StiffnessMediumLow),
-        label = "ColorContactAnimation"
+        label = stringResource(R.string.animate_color_label)
     )
 
     ListItem(
@@ -56,16 +61,19 @@ internal fun ContactItem(
             .combinedClickable(
                 interactionSource = MutableInteractionSource(),
                 indication = rememberRipple(),
+                onLongClickLabel = stringResource(R.string.add_contact_in_selected_list),
                 onLongClick = {
-                    colorItemContact = selectedListItemColor
+                    colorItemContact = selectedColorItemContact
                     contactViewModel.selectedContacts.add(contact)
                     hapticFeedback.performHapticFeedback(HapticFeedbackType.LongPress)
                 },
+                onClickLabel = stringResource(R.string.remove_contact_in_selected_list),
                 onClick = {
-                    colorItemContact = defaultListItemColor
+                    colorItemContact = defaultColorItemContact
                     contactViewModel.selectedContacts.remove(contact)
                 },
-                onDoubleClick = { contact.id?.let { onContactDetail(it) } })
+                onDoubleClick = { contact.id?.let { onContactDetail(it) } }
+            )
             .then(modifier),
         leadingContent = { CircleAvatar(contact.firstName, contact.lastName, contact.avatarColor) },
         headlineContent = {
@@ -74,7 +82,7 @@ internal fun ContactItem(
                     contact.firstName.isBlank() -> contact.lastName
                     contact.lastName.isBlank() -> contact.firstName
                     else -> "${contact.firstName} ${contact.lastName}"
-                },
+                }
             )
         },
         colors = ListItemDefaults.colors(animateColorItemContact)

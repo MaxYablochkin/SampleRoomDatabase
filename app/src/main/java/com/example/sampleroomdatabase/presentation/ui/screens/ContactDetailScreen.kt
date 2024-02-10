@@ -43,11 +43,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.example.sampleroomdatabase.R
 import com.example.sampleroomdatabase.data.database.Contact
 import com.example.sampleroomdatabase.presentation.ContactViewModel
 import com.example.sampleroomdatabase.presentation.ui.components.ActionButton
@@ -70,7 +72,10 @@ fun ContactDetailScreen(
             TopAppBar(
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
-                        Icon(Icons.AutoMirrored.Default.ArrowBack, "")
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Default.ArrowBack,
+                            contentDescription = stringResource(R.string.close_contact_detail_screen)
+                        )
                     }
                 },
                 title = {
@@ -90,14 +95,16 @@ fun ContactDetailScreen(
                 },
                 actions = {
                     IconButton(onClick = { /*TODO*/ }) {
-                        Icon(Icons.Outlined.Edit, "")
+                        Icon(Icons.Outlined.Edit, null)
                     }
                     IconButton(onClick = { /*TODO*/ }) {
-                        Icon(Icons.Outlined.Star, "")
+                        Icon(Icons.Outlined.Star, null)
                     }
-
                     IconButton(onClick = { expanded = true }) {
-                        Icon(Icons.Default.MoreVert, "")
+                        Icon(
+                            imageVector = Icons.Default.MoreVert,
+                            contentDescription = stringResource(R.string.more_options)
+                        )
                     }
                     AnimatedVisibility(visible = expanded) {
                         DropdownMenu(
@@ -105,7 +112,7 @@ fun ContactDetailScreen(
                             onDismissRequest = { expanded = false }
                         ) {
                             DropdownMenuItem(
-                                text = { Text("Delete") },
+                                text = { Text(text = stringResource(R.string.delete_contact)) },
                                 onClick = {
                                     contact?.let { contactViewModel.deleteContact(it) }
                                     expanded = false
@@ -178,28 +185,24 @@ fun ContactDetailScreen(
                         ) {
                             ActionButton(
                                 modifier = Modifier.weight(1f),
-                                text = "Call",
+                                text = stringResource(R.string.btn_call),
                                 icon = Icons.Outlined.Call,
-                                contentDescription = "call"
                             )
                             ActionButton(
                                 modifier = Modifier.weight(1f),
-                                text = "Text",
+                                text = stringResource(R.string.btn_text),
                                 icon = Icons.AutoMirrored.Outlined.Message,
-                                contentDescription = "message"
                             )
                             ActionButton(
                                 modifier = Modifier.weight(1f),
-                                text = "Video",
+                                text = stringResource(R.string.btn_video),
                                 icon = Icons.Outlined.VideoCameraFront,
-                                contentDescription = "video"
                             )
                             if (it.email.isNotBlank()) {
                                 ActionButton(
                                     modifier = Modifier.weight(1f),
-                                    text = "Email",
+                                    text = stringResource(R.string.btn_email),
                                     icon = Icons.Outlined.Mail,
-                                    contentDescription = "email"
                                 )
                             }
                         }
@@ -211,21 +214,21 @@ fun ContactDetailScreen(
                 contact?.let {
                     if (it.mobileNumber.isNotBlank() || it.email.isNotBlank()) {
                         Spacer(Modifier.height(15.dp))
-                        ContactInfoCard(nameCard = "Contact info") {
+                        ContactInfoCard(nameCard = stringResource(R.string.contact_info)) {
                             if (it.mobileNumber.isNotBlank()) {
                                 ListItem(
                                     modifier = Modifier.clickable { },
-                                    leadingContent = { Icon(Icons.Outlined.Phone, "") },
+                                    leadingContent = { Icon(Icons.Outlined.Phone, null) },
                                     headlineContent = { Text(it.mobileNumber) },
-                                    supportingContent = { Text("Mobile") }
+                                    supportingContent = { Text(text = stringResource(R.string.mobile_info)) }
                                 )
                             }
                             if (it.email.isNotBlank()) {
                                 ListItem(
                                     modifier = Modifier.clickable { },
-                                    leadingContent = { Icon(Icons.Outlined.Email, "") },
+                                    leadingContent = { Icon(Icons.Outlined.Email, null) },
                                     headlineContent = { Text(it.email) },
-                                    supportingContent = { Text("Email") }
+                                    supportingContent = { Text(text = stringResource(R.string.email_info)) }
                                 )
                             }
                         }
@@ -237,11 +240,11 @@ fun ContactDetailScreen(
                 contact?.let {
                     if (it.companyName.isNotBlank()) {
                         Spacer(Modifier.height(15.dp))
-                        ContactInfoCard(nameCard = "About ${it.firstName}") {
+                        ContactInfoCard(nameCard = "${stringResource(R.string.about_person)} ${it.firstName}") {
                             ListItem(
-                                leadingContent = { Icon(Icons.Default.Business, "") },
+                                leadingContent = { Icon(Icons.Default.Business, null) },
                                 headlineContent = { Text(it.companyName) },
-                                supportingContent = { Text("Company") }
+                                supportingContent = { Text(text = stringResource(R.string.company_info)) }
                             )
                         }
                     }

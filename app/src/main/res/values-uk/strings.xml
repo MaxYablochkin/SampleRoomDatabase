@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SampleRoomDatabase</string>
+
+    <!--MainScreen-->
+    <string name="image_on_the_top_appbar">Значок програми</string>
+    <string name="title_on_main_screen">Контакти</string>
+    <string name="go_to_the_settings_screen">Відкрити екран налаштувань</string>
+    <string name="selected_contacts">вибрано</string>
+    <string name="btn_create_contact">Додати контакт</string>
+    <string name="btn_create_contact_in_list">Створити новий контакт</string>
+    <string name="animate_color_label">КолірАнімаціїКонтакта</string>
+    <string name="go_to_the_create_contact_screen">Відкрийте екран створення контакту</string>
+    <string name="add_contact_in_selected_list">Ви додали контакт у вибраний список для видалення</string>
+    <string name="remove_contact_in_selected_list">Ви видалили вибраний контакт із вибраного списку</string>
+    <string name="clear_selected_contacts">Очистити вибрані контакти</string>
+
+    <!--CreateContactScreen-->
+    <string name="close_create_contact_screen">Закрийте екран створення контакту</string>
+    <string name="title_on_create_contact_screen">Створити контакт</string>
+    <string name="save_contact">Зберегти</string>
+    <string name="add_fake_contacts">Додайте підроблені контакти</string>
+    <string name="delete_all_contacts">Видалити всі контакти</string>
+    <string name="first_name">Ім\'я</string>
+    <string name="last_name">Прізвище</string>
+    <string name="more_fields">Більше полів</string>
+    <string name="mobile">Мобільний</string>
+    <string name="email">Електронна пошта</string>
+    <string name="company">Компанія</string>
+    <string name="toast_message">Ім\'я та прізвище порожні</string>
+    <string name="dialog_saving_contact_text">Ваші зміни не збережено</string>
+    <string name="btn_discard">Відкинути</string>
+    <string name="more_options">Більше варіантів</string>
+
+    <!--ContactDetailScreen-->
+    <string name="close_contact_detail_screen">Закрити екран контактних даних</string>
+    <string name="delete_contact">Видалити</string>
+    <string name="btn_call">Дзвінок</string>
+    <string name="btn_text">Відправити повідомлення</string>
+    <string name="btn_video">Відеодзвінок</string>
+    <string name="btn_email">Електронна пошта</string>
+    <string name="contact_info">Контактна інформація</string>
+    <string name="mobile_info">Мобільний</string>
+    <string name="email_info">Електронна пошта</string>
+    <string name="company_info">Компанія</string>
+    <string name="about_person">Про</string>
+
+    <!--SettingsScreen-->
+    <string name="title_on_settings_screen">Налаштування</string>
+    <string name="close_settings_screen">Закрити екран налаштувань</string>
+    <string name="name_setting_theme">Тема</string>
+    <string name="primary_text_theme">Виберіть тему</string>
+    <string-array name="secondary_text_theme">
+        <item>Світла</item>
+        <item>Темна</item>
+        <item>Система за умовчанням</item>
+    </string-array>
+    <string name="name_setting_color">Колір</string>
+    <string name="primary_text_color">Динамічні кольори</string>
+    <string name="secondary_text_color">Android 12+</string>
+    <string name="primary_text_amoled">AMOLED</string>
+    <string name="info_bottom_content">
+        Щоб змінити тему віджета та сповіщень Завдань, керуйте налаштуваннями екрана та відображення Android.
+    </string>
+    <string name="link_text">налаштуваннями екрана та відображення</string>
+
+</resources>

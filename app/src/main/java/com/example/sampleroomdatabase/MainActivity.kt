@@ -8,7 +8,6 @@ import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
@@ -60,10 +59,7 @@ class MainActivity : ComponentActivity() {
                 dynamicColor = dynamicColor.value,
                 amoledColor = amoledColor.value
             ) {
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
+                Surface(modifier = Modifier.fillMaxSize()) {
                     AppNavHost(
                         theme = theme.value,
                         dynamicColor = dynamicColor.value,

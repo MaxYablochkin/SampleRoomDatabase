@@ -43,9 +43,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.example.sampleroomdatabase.R
 import com.example.sampleroomdatabase.data.database.Contact
 import com.example.sampleroomdatabase.presentation.ContactViewModel
 import com.example.sampleroomdatabase.presentation.ui.components.ContactImageItem
@@ -69,7 +72,13 @@ fun CreateContactScreen(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             TopAppBar(
-                title = { Text("Create contact") },
+                title = {
+                    Text(
+                        text = stringResource(R.string.title_on_create_contact_screen),
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                },
                 navigationIcon = {
                     IconButton(
                         onClick = {
@@ -80,7 +89,10 @@ fun CreateContactScreen(
                             }
                         }
                     ) {
-                        Icon(Icons.Default.Close, "")
+                        Icon(
+                            imageVector = Icons.Default.Close,
+                            contentDescription = stringResource(R.string.close_create_contact_screen)
+                        )
                     }
                     if (openDialog) {
                         DialogSavingContact(
@@ -98,10 +110,13 @@ fun CreateContactScreen(
                             )
                         }
                     ) {
-                        Text("Save")
+                        Text(text = stringResource(R.string.save_contact))
                     }
                     IconButton(onClick = { expanded = true }) {
-                        Icon(Icons.Default.MoreVert, "")
+                        Icon(
+                            imageVector = Icons.Default.MoreVert,
+                            contentDescription = stringResource(R.string.more_options)
+                        )
                     }
                     AnimatedVisibility(expanded) {
                         DropdownMenu(
@@ -129,15 +144,15 @@ fun CreateContactScreen(
                 OutlinedTextField(
                     value = contactViewModel.firstName,
                     onValueChange = { contactViewModel.firstName = it },
-                    label = { Text("First name") },
-                    leadingIcon = { Icon(Icons.Outlined.Person, "") },
+                    label = { Text(text = stringResource(R.string.first_name)) },
+                    leadingIcon = { Icon(Icons.Outlined.Person, null) },
                     modifier = Modifier.fillMaxWidth()
                 )
                 Spacer(modifier = Modifier.height(15.dp))
                 OutlinedTextField(
                     value = contactViewModel.lastName,
                     onValueChange = { contactViewModel.lastName = it },
-                    label = { Text("Last name") },
+                    label = { Text(text = stringResource(R.string.last_name)) },
                     modifier = Modifier.fillMaxWidth()
                 )
             }
@@ -146,7 +161,11 @@ fun CreateContactScreen(
                 ListItem(
                     modifier = Modifier.clickable { showMore = !showMore },
                     headlineContent = {
-                        Text("More fields", color = MaterialTheme.colorScheme.primary)
+                        Text(
+                            text = stringResource(R.string.more_fields),
+                            color = MaterialTheme.colorScheme.primary,
+                            style = MaterialTheme.typography.titleSmall,
+                        )
                     },
                     trailingContent = {
                         AnimatedVisibility(
@@ -155,9 +174,9 @@ fun CreateContactScreen(
                             exit = slideOutVertically()
                         ) {
                             if (showMore) {
-                                Icon(Icons.Default.KeyboardArrowDown, "")
+                                Icon(Icons.Default.KeyboardArrowDown, null)
                             } else {
-                                Icon(Icons.Default.KeyboardArrowUp, "")
+                                Icon(Icons.Default.KeyboardArrowUp, null)
                             }
                         }
                     }
@@ -174,25 +193,24 @@ fun CreateContactScreen(
                         OutlinedTextField(
                             value = contactViewModel.mobileNumber,
                             onValueChange = { contactViewModel.mobileNumber = it },
-                            label = { Text("Mobile") },
-                            leadingIcon = { Icon(Icons.Outlined.Phone, "") },
+                            label = { Text(text = stringResource(R.string.mobile)) },
+                            leadingIcon = { Icon(Icons.Outlined.Phone, null) },
                             modifier = Modifier.fillMaxWidth()
                         )
                         Spacer(modifier = Modifier.height(15.dp))
                         OutlinedTextField(
                             value = contactViewModel.email,
                             onValueChange = { contactViewModel.email = it },
-                            label = { Text("Email") },
-                            leadingIcon = { Icon(Icons.Outlined.Email, "") },
-                            suffix = { Text("@gmail.com") },
+                            label = { Text(text = stringResource(R.string.email)) },
+                            leadingIcon = { Icon(Icons.Outlined.Email, null) },
                             modifier = Modifier.fillMaxWidth()
                         )
                         Spacer(modifier = Modifier.height(15.dp))
                         OutlinedTextField(
                             value = contactViewModel.companyName,
                             onValueChange = { contactViewModel.companyName = it },
-                            label = { Text("Company") },
-                            leadingIcon = { Icon(Icons.Default.Business, "") },
+                            label = { Text(text = stringResource(R.string.company)) },
+                            leadingIcon = { Icon(Icons.Default.Business, null) },
                             modifier = Modifier.fillMaxWidth()
                         )
                     }

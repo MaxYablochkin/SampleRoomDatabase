@@ -4,7 +4,9 @@ import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.sampleroomdatabase.R
 import com.example.sampleroomdatabase.data.database.Contact
 import com.example.sampleroomdatabase.presentation.ContactViewModel
 
@@ -17,11 +19,11 @@ internal fun DropdownMenu(
 ) {
     DropdownMenu(expanded = expanded, onDismissRequest = onDismissRequest) {
         DropdownMenuItem(
-            text = { Text("Pre init contacts") },
+            text = { Text(text = stringResource(R.string.add_fake_contacts)) },
             onClick = { contactViewModel.preInitContacts() }
         )
         DropdownMenuItem(
-            text = { Text("Delete all contacts") },
+            text = { Text(text = stringResource(R.string.delete_all_contacts)) },
             onClick = { contactViewModel.deleteAllContacts(contacts) }
         )
     }

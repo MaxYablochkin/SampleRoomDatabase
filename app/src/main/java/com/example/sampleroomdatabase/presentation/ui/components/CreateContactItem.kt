@@ -14,8 +14,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.sampleroomdatabase.R
 import com.example.sampleroomdatabase.navigation.Screens
 
 @Composable
@@ -26,9 +28,13 @@ fun CreateContactItem(navController: NavController) {
             .clip(RoundedCornerShape(15.dp))
             .clickable { navController.navigate(Screens.CreateContactScreen.destination) },
         leadingContent = {
-            Icon(Icons.Default.AccountCircle, null, Modifier.size(40.dp))
+            Icon(
+                imageVector = Icons.Default.AccountCircle,
+                contentDescription = null,
+                modifier = Modifier.size(40.dp)
+            )
         },
-        headlineContent = { Text("Create new contact") },
+        headlineContent = { Text(text = stringResource(R.string.btn_create_contact_in_list)) },
         colors = ListItemDefaults.colors(
             headlineColor = MaterialTheme.colorScheme.primary,
             leadingIconColor = MaterialTheme.colorScheme.primary,

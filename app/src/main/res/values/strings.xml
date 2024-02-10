@@ -1,3 +1,66 @@
 <resources>
     <string name="app_name">SampleRoomDatabase</string>
+
+    <!--MainScreen-->
+    <string name="image_on_the_top_appbar">App icon</string>
+    <string name="title_on_main_screen">Contacts</string>
+    <string name="go_to_the_settings_screen">Open settings screen</string>
+    <string name="selected_contacts">selected</string>
+    <string name="btn_create_contact">Add contact</string>
+    <string name="btn_create_contact_in_list">Create new contact</string>
+    <string name="animate_color_label">ColorContactAnimation</string>
+    <string name="go_to_the_create_contact_screen">Open create contact screen</string>
+    <string name="add_contact_in_selected_list">You added contact in the selected list for remove</string>
+    <string name="remove_contact_in_selected_list">You removed selected contact from selected list</string>
+    <string name="clear_selected_contacts">Clear selected contacts</string>
+
+    <!--CreateContactScreen-->
+    <string name="close_create_contact_screen">Close create contact screen</string>
+    <string name="title_on_create_contact_screen">Create contact</string>
+    <string name="save_contact">Save</string>
+    <string name="add_fake_contacts">Add fake contacts</string>
+    <string name="delete_all_contacts">Delete all contacts</string>
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
+    <string name="more_fields">More fields</string>
+    <string name="mobile">Mobile</string>
+    <string name="email">Email</string>
+    <string name="company">Company</string>
+    <string name="toast_message">First and last name empty</string>
+    <string name="dialog_saving_contact_text">Your changes have not been saved</string>
+    <string name="btn_discard">Discard</string>
+    <string name="more_options">More options</string>
+
+    <!--ContactDetailScreen-->
+    <string name="close_contact_detail_screen">Close contact detail screen</string>
+    <string name="delete_contact">Delete</string>
+    <string name="btn_call">Call</string>
+    <string name="btn_text">Text</string>
+    <string name="btn_video">Video</string>
+    <string name="btn_email">Email</string>
+    <string name="contact_info">Contact info</string>
+    <string name="mobile_info">Mobile</string>
+    <string name="email_info">Email</string>
+    <string name="company_info">Company</string>
+    <string name="about_person">About</string>
+
+    <!--SettingsScreen-->
+    <string name="title_on_settings_screen">Settings</string>
+    <string name="close_settings_screen">Close settings screen</string>
+    <string name="name_setting_theme">Theme</string>
+    <string name="primary_text_theme">Choose theme</string>
+    <string-array name="secondary_text_theme">
+        <item>Light</item>
+        <item>Dark</item>
+        <item>System default</item>
+    </string-array>
+    <string name="name_setting_color">Color</string>
+    <string name="primary_text_color">Dynamic color</string>
+    <string name="secondary_text_color">Android 12+</string>
+    <string name="primary_text_amoled">AMOLED</string>
+    <string name="info_bottom_content">
+        To change the theme of your Tasks widget and notifications, manage your Android screen and display settings.
+    </string>
+    <string name="link_text">screen and display settings</string>
+
 </resources>

@@ -41,7 +41,7 @@ fun ContactImageItem(modifier: Modifier = Modifier) {
         ) {
             Icon(
                 imageVector = Icons.Outlined.AddPhotoAlternate,
-                contentDescription = "",
+                contentDescription = null,
                 tint = MaterialTheme.colorScheme.onSecondaryContainer,
                 modifier = Modifier.size(50.dp)
             )

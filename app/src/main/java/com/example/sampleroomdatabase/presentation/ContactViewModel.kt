@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.AP
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.CreationExtras
 import com.example.sampleroomdatabase.ContactApp
+import com.example.sampleroomdatabase.R
 import com.example.sampleroomdatabase.data.database.Contact
 import com.example.sampleroomdatabase.data.database.ContactDatabase
 import com.example.sampleroomdatabase.data.database.fakeContacts
@@ -58,7 +59,7 @@ class ContactViewModel(private val database: ContactDatabase) : ViewModel() {
 
     fun saveContact(context: Context, popBackStack: () -> Unit) {
         if (firstName.isBlank() && lastName.isBlank()) {
-            Toast.makeText(context, "First and last name empty", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, R.string.toast_message, Toast.LENGTH_SHORT).show()
         } else {
             insertContact()
             popBackStack()
