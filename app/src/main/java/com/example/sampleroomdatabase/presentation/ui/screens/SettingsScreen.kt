@@ -29,7 +29,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
@@ -71,6 +73,7 @@ fun SettingsScreen(
                 .padding(innerPadding)
                 .verticalScroll(rememberScrollState()),
         ) {
+            val localHapticFeedback = LocalHapticFeedback.current
             var openDialog by rememberSaveable { mutableStateOf(false) }
             val themeNames =
                 LocalContext.current.resources.getStringArray(R.array.secondary_text_theme)
@@ -113,12 +116,16 @@ fun SettingsScreen(
                     nameSetting = stringResource(R.string.name_setting_color),
                     primaryText = stringResource(R.string.primary_text_color),
                     secondaryText = stringResource(R.string.secondary_text_color),
-                    onClick = { userSettings.dynamicColor = !userSettings.dynamicColor },
+                    onClick = {
+                        userSettings.dynamicColor = !userSettings.dynamicColor
+                        localHapticFeedback.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                    },
                     trailingContent = {
                         Switch(
                             checked = dynamicColor,
                             onCheckedChange = {
                                 userSettings.dynamicColor = !userSettings.dynamicColor
+                                localHapticFeedback.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                             },
                             colors = SwitchColors,
                             thumbContent = {
@@ -148,12 +155,16 @@ fun SettingsScreen(
             AnimatedVisibility(visible = darkTheme) {
                 Setting(
                     primaryText = stringResource(R.string.primary_text_amoled),
-                    onClick = { userSettings.amoledColor = !userSettings.amoledColor },
+                    onClick = {
+                        userSettings.amoledColor = !userSettings.amoledColor
+                        localHapticFeedback.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                    },
                     trailingContent = {
                         Switch(
                             checked = amoledColor,
                             onCheckedChange = {
                                 userSettings.amoledColor = !userSettings.amoledColor
+                                localHapticFeedback.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                             },
                             colors = SwitchColors,
                             thumbContent = {
