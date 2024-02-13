@@ -1,4 +1,4 @@
-### APK https://bit.ly/3utdvk5
+### APK https://bit.ly/3SWpJuX
 <hr>
 
 <summary>SampleRoomDatabase:</summary>
